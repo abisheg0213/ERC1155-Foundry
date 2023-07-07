@@ -30,7 +30,7 @@ contract Marketplace is ERC1155,Ownable
     }
     function mintToken(uint _tierNumber,uint _nooftokens) public payable 
     {
-        require(balanceOf(msg.sender, _tierNumber)<mintingLimit,"you have reached the minting Limit");
+        require((balanceOf(msg.sender, _tierNumber)+_nooftokens)<=mintingLimit,"you have reached the minting Limit");
         require(roles[MINTER][msg.sender],"You are not the minter");
         require(msg.value==tiertovalue[_tierNumber],"Required Amount is not paid");
         _mint(msg.sender, _tierNumber, _nooftokens, "");
